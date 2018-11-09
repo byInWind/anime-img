@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>好玩的效果</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .el {
+            border-radius: 10px;
+            width: 60px;
+            height: 60px;
+        }
+
+        #CSStransforms, #keyframes, #unitlessValue, #functionBasedElasticity, #functionBasedDuration, #functionBasedElasticity2 {
+            margin-top: 70px;
+        }
+    </style>
+</head>
+<body>
+<div id="CSStransforms">
+    <img class="small square el" src="./img.jpg" alt="">
+</div>
+<div id="unitlessValue">
+    <img class="small square el" src="./img2.jpg" alt="">
+</div>
+<div id="relativeValues">
+    <img class="small square el" src="./img.jpg" alt="">
+</div>
+<div id="keyframes">
+    <img class="small square el" src="./img.jpg" alt="">
+</div>
+
+<div id="functionBasedDuration">
+    <div class="line">
+        <img class="small square el" src="./img.jpg" alt="">
+    </div>
+    <div class="line">
+        <img class="small square el" src="./img.jpg" alt="">
+    </div>
+    <div class="line">
+        <img class="small square el" src="./img.jpg" alt="">
+    </div>
+</div>
+<div id="functionBasedElasticity">
+    <div class="line">
+        <img class="small square el" src="./img.jpg" alt="">
+    </div>
+    <div class="line">
+        <img class="small square el" src="./img.jpg" alt="">
+    </div>
+    <div class="line">
+        <img class="small square el" src="./img.jpg" alt="">
+    </div>
+</div>
+<div id="functionBasedElasticity2">
+    <div class="line">
+        <img class="small square el" src="./img.jpg" alt="">
+    </div>
+    <div class="line">
+        <img class="small square el" src="./img.jpg" alt="">
+    </div>
+    <div class="line">
+        <img class="small square el" src="./img.jpg" alt="">
+    </div>
+</div>
+<script src="./anime.min.js"></script>
+<script>
+    var CSStransforms = anime({
+        targets: '#CSStransforms .el',
+        translateX: 350,
+        scale: 2,
+        loop: true,
+        duration: 4000,
+        rotate: '1turn'
+    });
+    var unitlessValue = anime({
+        targets: '#unitlessValue .el',
+        translateX: 350,
+        loop: true,
+        rotate: 540
+    });
+    var relativeValues = anime({
+        targets: '#relativeValues .el',
+        translateX: {
+            value: '+=150',
+            duration: 1000
+        },
+        width: {
+            value: '-=10',
+            duration: 1800,
+            easing: 'easeInOutSine'
+        },
+        height: {
+            value: '*=4',
+            duration: 1800,
+            easing: 'easeInOutSine'
+        },
+        direction: 'alternate'
+    });
+    var keyframes = anime({
+        targets: '#keyframes .el',
+        translateX: [
+            {value: 250, duration: 1000, delay: 500, elasticity: 0},
+            {value: 0, duration: 1000, delay: 500, elasticity: 0}
+        ],
+        translateY: [
+            {value: -40, duration: 500, elasticity: 100},
+            {value: 40, duration: 500, delay: 1000, elasticity: 100},
+            {value: 0, duration: 500, delay: 1000, elasticity: 100}
+        ],
+        scaleX: [
+            {value: 4, duration: 100, delay: 500, easing: 'easeOutExpo'},
+            {value: 1, duration: 900, elasticity: 300},
+            {value: 4, duration: 100, delay: 500, easing: 'easeOutExpo'},
+            {value: 1, duration: 900, elasticity: 300}
+        ],
+        scaleY: [
+            {value: [1.75, 1], duration: 500},
+            {value: 2, duration: 50, delay: 1000, easing: 'easeOutExpo'},
+            {value: 1, duration: 450},
+            {value: 1.75, duration: 50, delay: 1000, easing: 'easeOutExpo'},
+            {value: 1, duration: 450}
+        ],
+        loop: true
+    });
+
+    var functionBasedDuration = anime({
+        targets: '#functionBasedDuration .el',
+        translateX: 350,
+        direction: 'alternate',
+        loop: true,
+        duration: function (el, i, l) {
+            return 1000 + (i * 1000);
+        }
+    });
+    var functionBasedElasticity = anime({
+        targets: '#functionBasedElasticity .el',
+        translateX: 350,
+        direction: 'alternate',
+        loop: true,
+        delay: function (el, i, l) {
+            return (i * 100);
+        }
+    });
+    var functionBasedElasticity2 = anime({
+        targets: '#functionBasedElasticity2 .el',
+        translateX: 350,
+        direction: 'alternate',
+        loop: true,
+        elasticity: function (el, i, l) {
+            return (200 + i * 200);
+        }
+    });
+</script>
+</body>
+</html>
